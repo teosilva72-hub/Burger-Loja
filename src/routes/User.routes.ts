@@ -1,6 +1,5 @@
 import {Router} from 'express';
 import UserController from '../api/controller/UserController';
-import auth from '../config/middleware/auth';
 import Auth from '../config/middleware/auth';
 
 const routes = Router();
