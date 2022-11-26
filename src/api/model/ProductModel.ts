@@ -15,9 +15,11 @@ const ProductSchema = new Schema({
     photo:Array,
     quantidade:Number,
     created:String,
+    userCreated:{type: Schema.Types.ObjectId, ref: 'user'},
     edited:String,
+    userEdited:{type: Schema.Types.ObjectId, ref: 'user'},
     active:Boolean,
-    
+    deleted:Boolean,
 },{
     toJSON: {
         virtuals: true
@@ -27,5 +29,11 @@ const ProductSchema = new Schema({
     }
 });
 
+ProductSchema.virtual('user', {
+    ref: 'User',
+    localField: 'userCreated',
+    foreignField: '_id',
+    justOne: false
+});
 
 export default model("Product", ProductSchema);

@@ -11,5 +11,12 @@ export default interface Product{
     localizacao:string,
     photo:any,
     quantidade:number
-    
+    created:String,
+    edited:String,
+    active:Boolean,
+    userCreated:string,
+    deleted:boolean,
+    id:string,
+    userEdited:string,
+    deletedCount:number,
 }

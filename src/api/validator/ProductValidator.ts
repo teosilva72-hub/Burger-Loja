@@ -1,6 +1,7 @@
 import Product from "../model/interfaces/Product";
+import User from "../model/interfaces/User";
 export default new class{
-    async RegisterProduct(data:Product){
+    async ValidaBody(data:Product){
         let msg = '';
         if(data.categoria.trim() == '' || data.categoria.trim() == undefined) msg += 'Categoria é um campo obrigatório.';
         else if(data.nome.trim() == '' || data.nome.trim() == undefined) msg += 'Nome é um campo obrigatório.';
@@ -14,4 +15,5 @@ export default new class{
         });
         return Retorno;
     }
+
 }
