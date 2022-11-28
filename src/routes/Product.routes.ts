@@ -7,6 +7,6 @@ const routes = Router();
 routes.post('/product-register', Auth, ProductController.ResgisterProduct);
 routes.put('/product-edit/:id', Auth, ProductController.UpdateProduct);
 routes.delete('/product-delete/:id', Auth, ProductController.DeleteProduct);
-routes.get('/product-list', Auth, ProductController.ListProduct);
+routes.get('/product-list', ProductController.ListProduct);
 
 export default routes;
