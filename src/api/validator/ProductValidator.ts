@@ -9,6 +9,7 @@ export default new class{
         else if(data.descricao.trim() == '' || data.descricao.trim() == undefined) msg += 'Descrição é um campo obrigatório.';
         else if(data.dt_fabricacao.trim() == '' || data.dt_fabricacao.trim() == undefined) msg += 'Data de fabricação é um campo obrigatório.';
         else if(data.dt_validade.trim() == '' || data.dt_validade.trim() == undefined) msg += 'Data de validade é um campo obrigatório.';
+        else if(data.valor.trim() == '' || data.valor == undefined) msg += 'Valor do produto é um campo obrigatório.';
         let ArrayMsg = msg.split('.');
         const Retorno:string[] = ArrayMsg.filter(function (i) {
             return i;
