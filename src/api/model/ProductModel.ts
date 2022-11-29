@@ -1,5 +1,7 @@
+import { Double } from 'bson';
 import {Schema} from 'mongoose';
 import { model } from 'mongoose';
+import { double } from 'webidl-conversions';
 
 const ProductSchema = new Schema({
     categoria:String,
@@ -12,6 +14,7 @@ const ProductSchema = new Schema({
     dt_validade:String,
     fabricante:String,
     localizacao:String,
+    valor:String,
     photo:Array,
     quantidade:Number,
     created:String,

@@ -34,5 +34,12 @@ export default new class{
         res.status(retorno.code).json(retorno);
     }
 
-
+    async setFile(req:any, res:Response){
+        try{
+            return res.status(200).json('sucess')
+        }catch(error){
+            console.log(error)
+            return res.status(200).json('error')
+        }
+    }
 }

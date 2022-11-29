@@ -1,3 +1,4 @@
+import { double } from 'webidl-conversions';
 export default interface Product{
     categoria:string,
     nome:string,
@@ -19,4 +20,5 @@ export default interface Product{
     id:string,
     userEdited:string,
     deletedCount:number,
+    valor:string
 }
