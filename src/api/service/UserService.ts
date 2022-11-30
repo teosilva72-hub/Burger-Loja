@@ -8,7 +8,7 @@ import User from '../model/interfaces/User';
 
 export default new class {
     async DateNow() {
-        return moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+        return moment(new Date()).format('DD-MM-YYYY HH:mm:ss');
     }
 
     async NewToken() {
@@ -28,9 +28,9 @@ export default new class {
         try {
             const checked: boolean = await UserRepository.UserExists(data.email);
             if (checked) {
-                if (data.photo == '' && data.photo != undefined) data.photo = 'undefined';
                 const inputsValid: string[] = await UserValidator.ValidUser(data);
                 if (inputsValid.length == 0) {
+                    if(data.photo == '' || data.photo == undefined) data.photo = 'undefined';
                     data.created = await this.DateNow(); //data do cadastro
                     data.levelAccess = 1; //nivel de acesso
                     data.token = await this.NewToken(); //gerando token
@@ -38,12 +38,15 @@ export default new class {
                     data.active = true; // ativo
                     data.edited = await this.DateNow();
                     data.password = bcryptjs.hashSync(data.password, 8);
-                    data.photo = files.filename;
+                    if(files != undefined) data.photo = files[0].filename;
+                    else if(data.photo == '') data.photo = 'undefined';
+                   
                     const user:User = await UserRepository.RegisterUser(data);
                     await Email.SendEmail(user, await this.HtmlEmail(user));
                     return { code: 201, status: true, message: 'Usuário criado com sucesso.', data: user };
                 } else return { code: 401, status: false, message: 'Erro de validação.', data: inputsValid };
             } else return { code: 401, status: false, message: 'E-mail já cadastrado, tente recuperar a sua senha.' };
+            
         } catch (error) {
             console.log(error);
             return { code: 500, status: false, message: `Error Server`, data: error };
@@ -95,9 +98,9 @@ export default new class {
         }
     }
 
-    async GetLogado(id:User){
-        
+    async GetLogado(id:User, photo:User){
         const user = await UserRepository.GetOneUser({_id:id});
+        console.log(user.photo)
         if(user) return {code:200, status:false, message: 'Usuário reconhecido.', data:user};
         else return {code:401, status:false, message: 'Erro ao trazer dados do usuário.', data:null};
     }

@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import express,{Router} from 'express';
 import UserController from '../api/controller/UserController';
 import Auth from '../config/middleware/auth';
 import Upload from '../config/upload/files';
@@ -10,4 +10,5 @@ routes.put('/user-edit', Auth, UserController.UpdateUser);
 routes.delete('/user-delete', Auth, UserController.DeleteUser);
 routes.get('/user-list', Auth, UserController.ListUser);
 routes.get('/user-logado', Auth, UserController.GetUserLogado);
-export default routes;
+
+export default routes;  

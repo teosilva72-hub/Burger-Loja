@@ -30,7 +30,7 @@ export default new class{
 
     async EmailValidator(data:string){
         const result = /\S+@\S+\.\S+/;
-        return await result.test(data);
+        return result.test(data);
     }
 
     async UserExists(data:object){

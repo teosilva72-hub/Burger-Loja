@@ -33,8 +33,10 @@ export default new class {
     }
 
     async GetUserLogado(req:any, res:Response){
+        console.log('aqui')
         const id:User = req.id;
-        const retorno = await UserService.GetLogado(id);
+        const photo:User = req.query;
+        const retorno = await UserService.GetLogado(id, photo);
         return res.status(retorno.code).json(retorno);
     }
 }

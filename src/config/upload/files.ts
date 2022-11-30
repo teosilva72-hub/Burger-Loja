@@ -4,7 +4,7 @@ import fs from 'fs';
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'src/upload')
+        cb(null, 'public/')
     },
     filename: function (req, file, cb) {
         // Extração da extensão do arquivo original:
