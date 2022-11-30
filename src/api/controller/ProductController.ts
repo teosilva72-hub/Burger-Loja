@@ -27,7 +27,6 @@ export default new class{
     }
 
     async ListProduct(req:any, res:Response){
-        console.log('aqui')
         const data:Product = req;
         const user:User = req;
         const retorno = await ProductService.ListProduct(data, user);

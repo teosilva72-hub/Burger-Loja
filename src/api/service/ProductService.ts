@@ -49,7 +49,7 @@ export default new class {
     }
     async ListProduct(data: Product, user: User) {
         try {
-            const list: Product = await ProductRepository.ListProduct(data);
+            const list: Product = await ProductRepository.ListProduct();
             const check: string[] = Object.values(list);
             if (check.length == 0) return { code: 400, status: false, message: 'Nenhum produto para ser listado.' };
             else return { code: 200, status: true, message: 'Produto listado com sucesso', data: list }

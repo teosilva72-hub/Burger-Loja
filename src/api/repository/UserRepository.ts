@@ -11,8 +11,9 @@ export default new class{
         return await UserValidator.UserExists(user);
     }
 
-    async GetOneUser(data:string){
-        const db:any = await UserModel.findOne({email:data});
+    async GetOneUser(data:any){
+        console.log(data)
+        const db:any = await UserModel.findOne(data);
         return db;
     }
 
@@ -30,4 +31,6 @@ export default new class{
         const db:any = await UserModel.find();
         return db;
     }
+
+
 }

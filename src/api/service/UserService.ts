@@ -24,11 +24,11 @@ export default new class {
         `;
     }
 
-    async RegisterUser(data:User) {
+    async RegisterUser(data:User, files:any) {
         try {
             const checked: boolean = await UserRepository.UserExists(data.email);
             if (checked) {
-                if (data.photo.trim() == '' && data.photo != undefined) data.photo = 'undefined';
+                if (data.photo == '' && data.photo != undefined) data.photo = 'undefined';
                 const inputsValid: string[] = await UserValidator.ValidUser(data);
                 if (inputsValid.length == 0) {
                     data.created = await this.DateNow(); //data do cadastro
@@ -38,6 +38,7 @@ export default new class {
                     data.active = true; // ativo
                     data.edited = await this.DateNow();
                     data.password = bcryptjs.hashSync(data.password, 8);
+                    data.photo = files.filename;
                     const user:User = await UserRepository.RegisterUser(data);
                     await Email.SendEmail(user, await this.HtmlEmail(user));
                     return { code: 201, status: true, message: 'Usuário criado com sucesso.', data: user };
@@ -94,4 +95,10 @@ export default new class {
         }
     }
 
+    async GetLogado(id:User){
+        
+        const user = await UserRepository.GetOneUser({_id:id});
+        if(user) return {code:200, status:false, message: 'Usuário reconhecido.', data:user};
+        else return {code:401, status:false, message: 'Erro ao trazer dados do usuário.', data:null};
+    }
 }

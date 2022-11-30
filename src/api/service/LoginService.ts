@@ -9,7 +9,7 @@ export default new class{
         try{
             const check:string[] = await LoginValidator.VerifyAccess(data);
             if(check.length == 0){
-                const user:any = await UserRepository.GetOneUser(data.email);
+                const user:any = await UserRepository.GetOneUser({email:data.email});
                 const checked:boolean = await LoginValidator.UserExists(user);
                 if(checked){
                     if(!(await bcrypt.compare(data.password, user.password)))

@@ -11,8 +11,8 @@ export default new class{
         const db:any = await ProductModel.updateOne(data);
         return db;
     }
-    async ListProduct(data:Product){
-        const db:any = await ProductModel.find(data);
+    async ListProduct(){
+        const db:any = await ProductModel.find();
         return db;
     }
     async GetOneProduct(id:string){

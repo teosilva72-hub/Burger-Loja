@@ -3,8 +3,8 @@ import UserService from '../service/UserService';
 import User from "../model/interfaces/User";
 export default new class {
 
-    async RegisterUser(req: Request, res: Response) {
-        const retorno:any = await UserService.RegisterUser(req.body);
+    async RegisterUser(req: any, res: Response) {
+        const retorno:any = await UserService.RegisterUser(req.body, req.files);
         return res.status(retorno?.code).json(retorno);
     }
 
@@ -17,7 +17,7 @@ export default new class {
 
     async DeleteUser(req:any, res:Response){
         let data:User = req.body;
-        data.id = req.id;
+        data.id;
         data.name = req.name;
         data.email = req.email;
         const retorno:any = await UserService.DeleteUser(data);
@@ -29,6 +29,12 @@ export default new class {
         data.level = req.access;
         data.id = req.id;  
         const retorno:any = await UserService.ListUser(data);
+        return res.status(retorno.code).json(retorno);
+    }
+
+    async GetUserLogado(req:any, res:Response){
+        const id:User = req.id;
+        const retorno = await UserService.GetLogado(id);
         return res.status(retorno.code).json(retorno);
     }
 }
