@@ -12,7 +12,6 @@ export default new class{
     }
 
     async GetOneUser(data:any){
-        console.log(data)
         const db:any = await UserModel.findOne(data);
         return db;
     }
