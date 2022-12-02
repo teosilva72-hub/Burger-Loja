@@ -15,7 +15,7 @@ const ProductSchema = new Schema({
     fabricante:String,
     localizacao:String,
     valor:String,
-    photo:Array,
+    photo:String,
     quantidade:Number,
     created:String,
     userCreated:{type: Schema.Types.ObjectId, ref: 'user'},

@@ -45,7 +45,7 @@ export default new class{
 
     async GetOneUser(data:any){
         if(data.id == '' || data.id == undefined) return false;
-        else if(data.level == '' || data.level == undefined || data.level != 1) return false;
+        else if(data.level == '' || data.level == undefined || data.level == 1) return false;
         else return true;
     }
 }
