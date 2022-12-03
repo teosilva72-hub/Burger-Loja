@@ -2,11 +2,11 @@
   "name": "project-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "src/config/server.ts",
+  "main": "build/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/server.ts",
+    "start": "node build/server.ts",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/config/server.ts"
   },
   "keywords": [],
