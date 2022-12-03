@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node build/config/server.js",
+    "start": "nodemon build/config/server.js",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/config/server.ts"
   },
   "keywords": [],
@@ -23,6 +23,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
     "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
