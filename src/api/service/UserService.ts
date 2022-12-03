@@ -5,6 +5,7 @@ import moment from 'moment';
 import 'dotenv/config';
 import Email from '../../config/email/SendEmail';
 import User from '../model/interfaces/User';
+import SendEmail from '../../config/email/SendEmail';
 
 export default new class {
     async DateNow() {
@@ -57,14 +58,14 @@ export default new class {
         try {
             const inputsValid: string[] = await UserValidator.ValidUser(data);
             if (inputsValid.length == 0) {
-                if (data.photo.trim() == '' && data.photo != undefined) data.photo = 'undefined';
+                if (data.photo == '' && data.photo != undefined) data.photo = 'undefined';
                 data.edited = await this.DateNow();
                 data.password = bcryptjs.hashSync(data.password, 8);
                 data.active = true; //ativo
                 const update:User = await UserRepository.UpdateUser(data);
                 return { code: 202, status: true, message: 'Usuário editado com sucesso.', data: data };
             }
-            return { code: 400, status: false, message: 'Erro de validação.', data: null };
+            return { code: 400, status: false, message: 'Erro de validação.', data: inputsValid };
         } catch (error) {
             console.log(error);
             return { code: 500, status: false, message: 'Server Error', data: null };
@@ -103,5 +104,31 @@ export default new class {
         console.log(user.photo)
         if(user) return {code:200, status:false, message: 'Usuário reconhecido.', data:user};
         else return {code:401, status:false, message: 'Erro ao trazer dados do usuário.', data:null};
+    }
+
+    async RecoverPass(data:User){
+        try{
+            const checked:boolean = await UserValidator.RecoverPass(data);
+            if(checked){
+                const user:any = await UserRepository.GetOneUser({email:data.email});
+                if(user){
+                    data.password = bcryptjs.hashSync('12345', 8);
+                    const update = await UserRepository.RecoverPass(data);
+                    data.password = '12345'
+                    await Email.SendEmail(data, this.HtmlRecoverpass(data));
+                    return {code:200, status:true, message:'Email de recuperação enviado', data:update};
+                }else return {code: 401, status:false, message:'Email não cadastrado.', data:null};
+            }else return {code: 400, status:false, message:'Email invalido.', data:null};
+        }catch(error){
+            console.log(error);
+            return {code: 500, status: false, message:'Server Error', data:null};
+        }
+    }
+    HtmlRecoverpass(data:User){
+        return`
+            <h1>A sua nova senha.</h1>
+            <h2>Senha: ${data.password}</h2>
+            <h3>Não compartilhe com ninguém!</h4>
+        `
     }
 }

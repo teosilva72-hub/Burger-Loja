@@ -15,5 +15,6 @@ export default interface User{
     active:boolean,
     id:string,
     level:number,
-    access:number
+    access:number,
+    length:number
 }

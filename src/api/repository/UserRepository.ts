@@ -21,6 +21,12 @@ export default new class{
         return db;
     }
 
+    async RecoverPass(data:any){
+        console.log(data)
+        const db:any = await UserModel.updateOne({email:data.email}, data);
+        return db;
+    }
+
     async DeleteUser(data:string){
         const db = await UserModel.deleteOne({_id:data});
         return db;

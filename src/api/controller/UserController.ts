@@ -11,8 +11,11 @@ export default new class {
     async UpdateUser(req:any, res:Response){
         let data:User = req.body;
         data.id = req.id;
+        data.photo = req.files[0].filename;
+        console.log(data)
+       
         const retorno:any = await UserService.UpdateUser(data);
-        return res.status(retorno?.code).json({retorno});
+        return res.status(retorno?.code).json(retorno);
     }
 
     async DeleteUser(req:any, res:Response){
@@ -21,7 +24,7 @@ export default new class {
         data.name = req.name;
         data.email = req.email;
         const retorno:any = await UserService.DeleteUser(data);
-        return res.status(retorno?.code).json({retorno});
+        return res.status(retorno?.code).json(retorno);
     }
 
     async ListUser(req:any, res:Response){
@@ -37,6 +40,12 @@ export default new class {
         const id:User = req.id;
         const photo:User = req.query;
         const retorno = await UserService.GetLogado(id, photo);
+        return res.status(retorno.code).json(retorno);
+    }
+
+    async RecoverPass(req:any, res:Response){
+        const data:User = req.body
+        const retorno = await UserService.RecoverPass(data);
         return res.status(retorno.code).json(retorno);
     }
 }

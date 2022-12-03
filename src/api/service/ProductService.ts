@@ -9,7 +9,7 @@ export default new class {
     }
     async RegisterProduct(data: Product, user: User) {
         try {
-            if (user.access == 1) {
+            if (user.access == 2) {
                 const checked = await ProductValidator.ValidaBody(data);
                 if (checked.length == 0) {
                     data.created = await this.DateNow();
