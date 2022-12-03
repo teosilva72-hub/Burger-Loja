@@ -5,7 +5,7 @@
   "main": "build/config/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "postinstall": "tsc",
     "start": "nodemon build/config/server.js",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/config/server.ts"
   },
@@ -36,5 +36,8 @@
     "@types/nodemailer": "^6.4.6",
     "@types/nodemon": "^1.19.2",
     "moment": "^2.29.4"
+  },
+  "engines":{
+    "node": "16.x"
   }
 }
