@@ -12,7 +12,7 @@ export default (
 
         //validar se existe authorization no header
         const authHeader = req.headers.authorization;
-
+        console.log(req.headers,'<<< token recebido')
         if (!authHeader) throw 'Acesso não autorizado (code 1)';
 
         //validar se há 2 partes authorization

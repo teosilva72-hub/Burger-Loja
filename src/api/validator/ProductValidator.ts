@@ -1,20 +1,13 @@
 import Product from "../model/interfaces/Product";
 import User from "../model/interfaces/User";
 export default new class{
-    async ValidaBody(data:Product){
-        let msg = '';
-        if(data.categoria.trim() == '' || data.categoria.trim() == undefined) msg += 'Categoria é um campo obrigatório.';
-        else if(data.nome.trim() == '' || data.nome.trim() == undefined) msg += 'Nome é um campo obrigatório.';
-        else if(data.marca.trim() == '' || data.marca.trim() == undefined) msg+= 'Marca é um campo obrigatório.';
-        else if(data.descricao.trim() == '' || data.descricao.trim() == undefined) msg += 'Descrição é um campo obrigatório.';
-        else if(data.dt_fabricacao.trim() == '' || data.dt_fabricacao.trim() == undefined) msg += 'Data de fabricação é um campo obrigatório.';
-        else if(data.dt_validade.trim() == '' || data.dt_validade.trim() == undefined) msg += 'Data de validade é um campo obrigatório.';
-        else if(data.valor.trim() == '' || data.valor == undefined) msg += 'Valor do produto é um campo obrigatório.';
-        let ArrayMsg = msg.split('.');
-        const Retorno:string[] = ArrayMsg.filter(function (i) {
-            return i;
-        });
-        return Retorno;
+   
+    async register(data:Product){
+        let value = Object.values(data);
+        for(var i = 0; i < value.length;i++){
+            if(value[i] == '') throw 'verifique se todos os campos estão preenchidos corretamente'
+        }
+        return true;
     }
 
 }
